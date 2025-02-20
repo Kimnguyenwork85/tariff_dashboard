@@ -10,7 +10,7 @@ import os
 # Function to update the data and push to GitHub
 def update_data():
     # Load the dataset from GitHub URL
-    csv_file_url = 'https://raw.githubusercontent.com/Kimnguyenwork85/tariff_dashboard/main/tariff_impact_companies.csv'
+    csv_file_url = 'https://raw.githubusercontent.com/Kimnguyenwork85/tariff_dashboard/main/dashboard_source_data.csv'
     df = pd.read_csv(csv_file_url)
 
     # Define the date range
