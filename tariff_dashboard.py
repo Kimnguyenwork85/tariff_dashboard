@@ -36,9 +36,9 @@ st.markdown("""
     </style>
     """, unsafe_allow_html=True)
 
-# Load data directly from the local file
-csv_file_path = '/Users/kimnguyen/Documents/steel_dashboard/dashboard_source_data.csv'
-data = pd.read_csv(csv_file_path)
+# Load data directly from the GitHub URL
+csv_file_url = 'https://raw.githubusercontent.com/Kimnguyenwork85/tariff_dashboard/main/dashboard_source_data.csv'
+data = pd.read_csv(csv_file_url)
 
 # Streamlit app title
 st.title("Tariff Performance Dashboard")
