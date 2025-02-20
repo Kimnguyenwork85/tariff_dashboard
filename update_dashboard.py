@@ -12,7 +12,7 @@ def update_data():
     # Load the dataset from GitHub URL
     csv_file_url = 'https://raw.githubusercontent.com/Kimnguyenwork85/tariff_dashboard/main/dashboard_source_data.csv'
     df = pd.read_csv(csv_file_url)
-
+    df = df[['Ticker', 'Industry', 'Company']]  # Select only the relevant columns
     # Define the date range
     end_date = pd.Timestamp.today().strftime('%Y-%m-%d')
     start_date = (pd.Timestamp.today() - pd.DateOffset(years=2)).strftime('%Y-%m-%d')
