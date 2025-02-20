@@ -1,0 +1,29 @@
+name: Tariff Dashboard Data Refresh
+
+on:
+  schedule:
+    - cron: '0 21 * * *'  # Runs at 9:00 PM UTC (1:00 PM PST)
+  workflow_dispatch:
+
+jobs:
+  refresh-data:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.x
+
+      - name: Install dependencies
+        run: |
+          pip install pandas yfinance tqdm requests
+
+      - name: Run update_dashboard.py
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python update_dashboard.py
