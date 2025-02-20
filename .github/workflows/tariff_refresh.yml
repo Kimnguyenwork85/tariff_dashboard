@@ -24,6 +24,6 @@ jobs:
 
       - name: Run update_dashboard.py
         env:
-          GITHUB_TOKEN: ${{ secrets.TARIFF_GITHUB_TOKEN }}
+          TARIFF_GITHUB_TOKEN: ${{ secrets.TARIFF_GITHUB_TOKEN }}
         run: |
           python update_dashboard.py
