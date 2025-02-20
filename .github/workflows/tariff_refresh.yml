@@ -2,7 +2,7 @@ name: Tariff Dashboard Data Refresh
 
 on:
   schedule:
-    - cron: '0 7 * * *'  # Runs at 7:00 AM UTC (11:00 PM PST)
+    - cron: '2 7 * * *'  # Runs at 7:02 AM UTC (11:02 PM PST)
   workflow_dispatch:
 
 jobs:
