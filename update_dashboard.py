@@ -25,7 +25,7 @@ def update_data():
         ticker = row['Ticker']
         Industry = row['Industry']
         Company = row['Company']
-        ticker_data = yf.download(ticker, start=start_date, end=end_date)[["Close", "High", "Low", "Open", "Volume"]]
+        ticker_data = yf.download(ticker, start=start_date, end=end_date, auto_adjust=False)[["Close", "High", "Low", "Open", "Volume"]]
         ticker_data = ticker_data.reset_index()
         ticker_data.columns = ticker_data.columns.droplevel(1)  # Remove multi-level columns
         ticker_data['Date'] = pd.to_datetime(ticker_data['Date']).dt.date
@@ -104,17 +104,22 @@ def update_data():
         "Accept": "application/vnd.github.v3+json"
     }
     response = requests.get(url, headers=headers)
-    response_json = response.json()
-    sha = response_json['sha']
+    if response.status_code == 200:
+        response_json = response.json()
+        sha = response_json['sha']
+    else:
+        sha = None
 
-    # Update the file on GitHub
+    # Update or create the file on GitHub
     update_url = f"https://api.github.com/repos/{repo}/contents/{path}"
     data = {
         "message": "Update dashboard_source_data.csv",
         "content": base64.b64encode(csv_data.encode()).decode(),
-        "sha": sha,
         "branch": branch
     }
+    if sha:
+        data["sha"] = sha
+
     response = requests.put(update_url, headers=headers, data=json.dumps(data))
 
     if response.status_code == 200:
