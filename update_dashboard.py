@@ -118,13 +118,11 @@ def update_data():
     response = requests.put(update_url, headers=headers, data=json.dumps(data))
 
     if response.status_code == 200:
-        st.success("File updated successfully.")
+        print("File updated successfully.")
     else:
-        st.error(f"Failed to update file: {response.status_code}")
-        st.json(response.json())
+        print(f"Failed to update file: {response.status_code}")
+        print(response.json())
 
-# Streamlit app
-st.title("Steel Data Refresh")
-
-if st.button("Update Data"):
+# Run the update function
+if __name__ == "__main__":
     update_data()
